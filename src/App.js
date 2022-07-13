@@ -1,23 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import './app.css';
+import {Decisions} from './components';
+import DecisionsContextProvider from './context/DecisionsContext';
+function App() {  
 
-function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DecisionsContextProvider>
+        <Decisions />
+      </DecisionsContextProvider>
     </div>
   );
 }
