@@ -55,7 +55,7 @@ const DecisionBoard = ({decisionId,options}) => {
         // getRowId={(row)=>row.id}
         columns={column}
         rows={options}
-        hideSocialLinks={true}
+        hideFooter={true}
         onCellEditCommit={(values,_)=>{
            let value = values.value;
            if(typeof value !== 'number') return;
