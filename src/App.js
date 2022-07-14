@@ -1,5 +1,5 @@
 import React from 'react';
-import {Decisions} from './components';
+import {Decisions, Notify} from './components';
 import DecisionsContextProvider from './context/DecisionsContext';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -23,6 +23,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <DecisionsContextProvider>
+          <Notify/>
           <Decisions />
         </DecisionsContextProvider>
       </div>

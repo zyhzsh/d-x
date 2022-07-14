@@ -10,22 +10,32 @@ const Options = ({decisionId,options}) => {
 
   const [editOptionName,setEditOptionName] = useState('');
   
+  const CheckDuplicate = (value)=>{
+    let duplicateOption = options.find((o=>{return o.name === value}));
+    if(duplicateOption) return true;
+    return false;
+  }
+
 
   const AddNewOptionHandler = () => {
     if(newOptionName==='') return;
+    let isDuplicate = CheckDuplicate(newOptionName);
+    if(isDuplicate){ alert('Duplicate option name');return;}
     AddOption(decisionId,newOptionName);
     setNewOptionName('');
   }
   const UpdateOptionHandler = () => {
+   let isDuplicate = CheckDuplicate(editOptionName);
+   if(isDuplicate){ 
+    alert('Duplicate option name');
+    setNewOptionName('');
+    UpdateOptionName(decisionId,onUpdateOptionId,'');
+  }
    UpdateOptionName(decisionId,onUpdateOptionId,editOptionName);
-    setTimeout(() => {
-      setOnUpdateOptionId(null);
-    }, 200);
   }
-  const DeleteOptionHandler = () => {
-    RemoveOption(decisionId,onUpdateOptionId)
+  const DeleteOptionHandler = (id) => {
+    RemoveOption(decisionId,id)
   }
-
 
   // Option component
   const Option = (option,_) => (
@@ -41,15 +51,14 @@ const Options = ({decisionId,options}) => {
             onFocus={(e)=>{setOnUpdateOptionId(option.id);setEditOptionName(e.target.value)}}
             onBlur={UpdateOptionHandler}
           />
-          {onUpdateOptionId===option.id&&<IconButton onClick={DeleteOptionHandler}><DeleteOutlineIcon color='primary'/></IconButton>}
+          <IconButton onClick={()=>DeleteOptionHandler(option.id)}><DeleteOutlineIcon color='primary'/></IconButton>
       </Grid>
       <Grid item xs={5} md={4}  sx={{ height: '40px' ,display: 'flex',pl:'4px',justifyContent: 'center',alignItems:'center'}}>{option.score}/100</Grid>
     </Grid>);
-
   return (
       <Grid item md={5.9} container sx={{  
         maxHeight: '300px',
-        padding: '.5rem 0 .5rem ' ,
+        padding: '0 .5rem 0 .5rem ',
         overflowY: 'auto',
         }} >
       {/* Header */}

@@ -21,7 +21,6 @@ const DecisionBoard = ({decisionId,options}) => {
     },
     ...FindDecision(decisionId).factors.map((f=>{
       return {
-
         field:f.name,
         headerName: <Typography variant='h6'>{f.name}</Typography>,
         headerAlign:'center',
@@ -43,22 +42,21 @@ const DecisionBoard = ({decisionId,options}) => {
       container 
       flexDirection='column'
       item 
-     sx={{  
+      sx={{  
       height: '290px',
       overflow: 'auto',
       gap: 0.5
       }} >
       <Grid item container justifyContent='center' alignItems='center'>
-       <Grid item  container justifyContent='center' alignItems='center' xs={12} ><Typography variant="h4" >Scores</Typography></Grid>
-
+       <Grid item  container justifyContent='center' alignItems='center' xs={12} ><Typography variant="h6" >Scores</Typography></Grid>
       </Grid>
-    {options.length !==0 ?
+    {options.length !==0?
       <DataGrid
-        getRowId={(row)=>row.id}
-        rows={options}
+        // getRowId={(row)=>row.id}
         columns={column}
+        rows={options}
         hideFooter={true}
-        onCellEditCommit={(values,event)=>{
+        onCellEditCommit={(values,_)=>{
            let value = values.value;
            if(typeof value !== 'number') return;
            if(value > 100) value = 100;
@@ -69,7 +67,7 @@ const DecisionBoard = ({decisionId,options}) => {
            UpdateFactorScore(decisionId,optionId,factorId,value);
         }}
       />:
-    <Grid item  container justifyContent='center' alignItems='center' ><Typography variant="h6" >No</Typography></Grid>
+    <Grid item  container justifyContent='center' alignItems='center' ><Typography variant="body1" >No content</Typography></Grid>
     }
   </Grid>
   )

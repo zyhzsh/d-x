@@ -2,50 +2,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
-
-// const factors = [
-//   {
-//     id:uuidv4(),
-//     name:'价钱',
-//     weight:0,
-//     score:0
-//   },
-//   {
-//     id:uuidv4(),
-//     name:'地点',
-//     weight:0,
-//     score:0
-//   },
-//   {
-//     id:uuidv4(),
-//     name:'语言',
-//     weight:0,
-//     score:0
-//   }
-// ];
-
-
-// const options = [
-//   { 
-//     id:uuidv4(),
-//     name:'中国',
-//     score:0,
-//     factors:factors
-//   },
-//   {
-//     id:uuidv4(),
-//     name:'日本',
-//     score:0,
-//     factors:factors
-//   },
-//   {
-//     id:uuidv4(),
-//     name:'德国',
-//     score:0,
-//     factors:factors
-//    }
-// ];
-
 const FetchedDecisions = [{
   id:uuidv4(),
   name: 'Your question here',
@@ -59,6 +15,7 @@ export const DecisionsContext = createContext()
 
 const DecisionsContextProvider = (props) => {
     const [decisions, setDecisions] = useState([]);
+
     useEffect(()=>{
       setDecisions(FetchedDecisions);
     },[])
@@ -94,19 +51,19 @@ const DecisionsContextProvider = (props) => {
     }
 
     const UpdateOptionName = (decisionId,optionId,value) => {
-        let option = FindOption(decisionId,optionId);
-        if(option === null || option==='undefined' ) return;
-        option.name = value;
-        let decisionIndex = decisions.findIndex(x => x.id === decisionId);
-        if(decisionIndex === -1) return ;
-        let updatedDecision = {...decisions[decisionIndex]};
-        let updatedOptions = [...updatedDecision.options];
-        let updatedOptionIndex = updatedOptions.findIndex(o=>o.id===option.id);
-        updatedOptions[updatedOptionIndex] = option;
-        updatedDecision = {...decisions[decisionIndex], options:updatedOptions};
-        let updatedDecisions = [...decisions];
-        updatedDecisions[decisionIndex]= updatedDecision;
-        setDecisions(updatedDecisions);  
+      let option = FindOption(decisionId,optionId);
+      if(option === null || option==='undefined' ) return;
+      option.name = value;
+      let decisionIndex = decisions.findIndex(x => x.id === decisionId);
+      if(decisionIndex === -1) return ;
+      let updatedDecision = {...decisions[decisionIndex]};
+      let updatedOptions = [...updatedDecision.options];
+      let updatedOptionIndex = updatedOptions.findIndex(o=>o.id===option.id);
+      updatedOptions[updatedOptionIndex] = option;
+      updatedDecision = {...decisions[decisionIndex], options:updatedOptions};
+      let updatedDecisions = [...decisions];
+      updatedDecisions[decisionIndex]= updatedDecision;
+      setDecisions(updatedDecisions);  
     }
 
     const RemoveOption = (decisionId,optionId) =>{
@@ -165,7 +122,6 @@ const DecisionsContextProvider = (props) => {
          if(d.id===decisionId) return newDecision;
          return d;
       }))]
-      console.log('jisuanhou',newDecisions);
       setDecisions(newDecisions);
     }
 
@@ -177,8 +133,6 @@ const DecisionsContextProvider = (props) => {
     }
 
     const AddFactor = (decisionId,value) => {
-      // let decisionIndex = decisions.findIndex(x => x.id === decisionId);
-      // if(decisionIndex === -1) return ;
       let decision  = FindDecision(decisionId);
       let newFactor = {id:uuidv4(),name:value,score:0, weight:0};
       let updatedDecision = {
@@ -186,7 +140,6 @@ const DecisionsContextProvider = (props) => {
         factors:[newFactor,...decision.factors],
         options:[...decision.options.map((o=>{return {...o,factors:[newFactor,...o.factors]}}))]
       }
-      console.log(updatedDecision);
       let updatedDecisions = [...decisions.filter(d=>d.id!==decisionId),updatedDecision];
       ReCalculateOptionScore(updatedDecisions,decisionId);
     }
@@ -249,6 +202,7 @@ const DecisionsContextProvider = (props) => {
 
       ReCalculateOptionScore(updatedDecisions,decisionId);
     }
+    
     return <DecisionsContext.Provider value={{ 
     decisions,
     UpdateQuestionTitle ,
@@ -262,7 +216,7 @@ const DecisionsContextProvider = (props) => {
     UpdateFactorName,
     RemoveFactor,
     AdjustFactorImportance,
-    UpdateFactorScore
+    UpdateFactorScore,
     }}>
         {props.children}
     </DecisionsContext.Provider>
