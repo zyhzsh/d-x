@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Grid } from '@mui/material'
 import {Question,Options,Factors,DecisionBoard} from '../';
 
@@ -56,8 +56,6 @@ const Decision = ({decision}) => {
           options={decision.options}
         />
     </Grid>
-
-   
     </Grid>
   )
 }

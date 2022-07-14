@@ -1,16 +1,12 @@
 import React,{useContext} from 'react'
-import { Grid ,Box,TextField,Button} from '@mui/material'
+import { Grid } from '@mui/material'
 import { DecisionsContext } from '../../context/DecisionsContext'
 import { DataGrid } from '@mui/x-data-grid';
-
 import { v4 as uuidv4 } from 'uuid';
 
 
-
-
-
 const DecisionBoard = ({decisionId,options}) => {
-  const {UpdateFactorScore} = useContext(DecisionsContext);
+  const {UpdateFactorScore,FindDecision} = useContext(DecisionsContext);
 
   const column = [
     { 
@@ -21,7 +17,7 @@ const DecisionBoard = ({decisionId,options}) => {
         return params.row.name;
       }
     },
-    ...options[0].factors.map((f=>{
+    ...FindDecision(decisionId).factors.map((f=>{
       return {
         field:f.name,
         headerName:f.name,
@@ -46,8 +42,8 @@ const DecisionBoard = ({decisionId,options}) => {
       overflow: 'auto',
       gap: 0.5
       }} >
-     <DataGrid
-        // getRowId={()=>uuidv4()}
+    {options.length !==0 && <DataGrid
+        getRowId={(row)=>row.id}
         rows={options}
         columns={column}
         hideFooter={true}
@@ -58,7 +54,7 @@ const DecisionBoard = ({decisionId,options}) => {
            let factorId = values.row.factors.find((f=>f.name===factorName)).id;
            UpdateFactorScore(decisionId,optionId,factorId,value);
         }}
-      />
+      />}
   </Grid>
   )
 }

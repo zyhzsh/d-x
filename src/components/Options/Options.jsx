@@ -1,6 +1,7 @@
 import React,{useState,useContext} from 'react'
 import { DecisionsContext } from '../../context/DecisionsContext';
 import { Grid,Button,TextField} from '@mui/material'
+import { v4 as uuidv4 } from 'uuid';
 
 const Options = ({decisionId,options}) => {
   const {AddOption,UpdateOptionName,RemoveOption} = useContext(DecisionsContext);
@@ -28,7 +29,7 @@ const Options = ({decisionId,options}) => {
 
   // Option component
   const Option = (option,_) => (
-     <Grid key={_} item container sx={{ mt:1, height: '40px',border: '1px solid blue'}}>
+     <Grid key={uuidv4()} item container sx={{ mt:1, height: '40px',border: '1px solid blue'}}>
       <Grid item xs={7} md={8}  sx={{  height: '40px' ,display: 'flex', justifyContent: 'center',alignItems:'center', border:'1px solid red'}}>
         <TextField 
             required
@@ -60,7 +61,7 @@ const Options = ({decisionId,options}) => {
     flexDirection: 'column-reverse'}}>Final Score:</Grid>
       </Grid>
       {/* Option */}
-      {options.map((option,_)=>{
+      {options!==[]&&options?.map((option,_)=>{
         return Option(option,_)
       })}
       <Grid item container  sx={{ mt:1, height: '40px'}}>

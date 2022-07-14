@@ -1,6 +1,7 @@
 import React,{useState,useContext} from 'react'
 import { DecisionsContext } from '../../context/DecisionsContext';
 import { Grid,Button,TextField,Slider} from '@mui/material'
+import { v4 as uuidv4 } from 'uuid';
 
 const Factors = ({decisionId,factors}) => {
   const {AddFactor,UpdateFactorName,RemoveFactor,AdjustFactorImportance} = useContext(DecisionsContext);
@@ -39,7 +40,7 @@ const processChange = debounce((factorId,value) => saveInput(factorId,value));
 
   // Option component
   const Factor = (factor,_) => (
-     <Grid key={_} item container sx={{ mt:1, height: '40px',border: '1px solid blue'}}>
+     <Grid key={uuidv4()} item container sx={{ mt:1, height: '40px',border: '1px solid blue'}}>
       <Grid item xs={7} md={8}  sx={{  height: '40px' ,display: 'flex', justifyContent: 'center',alignItems:'center', border:'1px solid red'}}>
         <TextField 
             required
@@ -83,7 +84,7 @@ const processChange = debounce((factorId,value) => saveInput(factorId,value));
     flexDirection: 'column-reverse'}}>Importance:</Grid>
       </Grid>
       {/* Option */}
-      {factors.map((factor,_)=>{
+      {factors!==[]&&factors.map((factor,_)=>{
         return Factor(factor,_)
       })}
       <Grid item container  sx={{ mt:1, height: '40px'}}>
