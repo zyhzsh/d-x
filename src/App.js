@@ -2,7 +2,6 @@ import React from 'react';
 import {Decisions} from './components';
 import DecisionsContextProvider from './context/DecisionsContext';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import './app.css';
 
 const theme = createTheme({
   palette: {
@@ -20,7 +19,6 @@ const theme = createTheme({
   },
 });
 function App() {  
-
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
