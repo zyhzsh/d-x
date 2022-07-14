@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
-const FetchedDecisions = [{
+const templateDecisions = [{
   id:uuidv4(),
   name: 'Your question here',
   description:'xxxx',
@@ -15,11 +15,18 @@ export const DecisionsContext = createContext()
 
 const DecisionsContextProvider = (props) => {
     const [decisions, setDecisions] = useState([]);
-
     useEffect(()=>{
-      setDecisions(FetchedDecisions);
+      let data = localStorage.getItem('decisions');
+      if(!data) {
+        localStorage.setItem('decisions',JSON.stringify(templateDecisions));
+        setDecisions(templateDecisions);
+      } 
+      setDecisions(JSON.parse(localStorage.getItem('decisions')));
     },[])
 
+    const Save=(decisions)=>{
+      localStorage.setItem('decisions',JSON.stringify(decisions));
+    }
     /* Decisions */
     const FindDecision = (decisionId) => decisions.find((d=>d.id === decisionId))
     const UpdateQuestionTitle = (decisionId,value) => {
@@ -29,6 +36,7 @@ const DecisionsContextProvider = (props) => {
       let updatedDecisions = [...decisions];
       updatedDecisions[decisionIndex]= updatedDecision;
       setDecisions(updatedDecisions);
+      Save(updatedDecisions);
   };
   
     /* Options */
@@ -63,7 +71,8 @@ const DecisionsContextProvider = (props) => {
       updatedDecision = {...decisions[decisionIndex], options:updatedOptions};
       let updatedDecisions = [...decisions];
       updatedDecisions[decisionIndex]= updatedDecision;
-      setDecisions(updatedDecisions);  
+      setDecisions(updatedDecisions); 
+      Save(updatedDecisions)
     }
 
     const RemoveOption = (decisionId,optionId) =>{
@@ -123,6 +132,7 @@ const DecisionsContextProvider = (props) => {
          return d;
       }))]
       setDecisions(newDecisions);
+      Save(newDecisions)
     }
 
      /* Factors */
@@ -158,6 +168,7 @@ const DecisionsContextProvider = (props) => {
       let updatedDecisions = [...decisions];
       updatedDecisions[decisionIndex]= updatedDecision;
       setDecisions(updatedDecisions);  
+      Save(updatedDecisions);
     }
 
     const RemoveFactor = (decisionId,factorId) =>{
@@ -203,6 +214,18 @@ const DecisionsContextProvider = (props) => {
       ReCalculateOptionScore(updatedDecisions,decisionId);
     }
     
+    const DeleteDecision = (decisionId)=>{
+      let updatedDecisions = [...decisions.filter((d=>d.id!==decisionId))];
+      setDecisions(updatedDecisions);
+      Save(updatedDecisions);
+    }
+    const AddNewDecision = ()=>{
+      let updatedDecisions = [{...templateDecisions[0],id:uuidv4()},...decisions];
+      setDecisions(updatedDecisions);
+      Save(updatedDecisions);
+    }
+
+
     return <DecisionsContext.Provider value={{ 
     decisions,
     UpdateQuestionTitle ,
@@ -217,6 +240,8 @@ const DecisionsContextProvider = (props) => {
     RemoveFactor,
     AdjustFactorImportance,
     UpdateFactorScore,
+    AddNewDecision,
+    DeleteDecision
     }}>
         {props.children}
     </DecisionsContext.Provider>

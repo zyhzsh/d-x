@@ -9,28 +9,15 @@ const Options = ({decisionId,options}) => {
   const [onUpdateOptionId,setOnUpdateOptionId] = useState(null);
 
   const [editOptionName,setEditOptionName] = useState('');
-  
-  const CheckDuplicate = (value)=>{
-    let duplicateOption = options.find((o=>{return o.name === value}));
-    if(duplicateOption) return true;
-    return false;
-  }
+
 
 
   const AddNewOptionHandler = () => {
     if(newOptionName==='') return;
-    let isDuplicate = CheckDuplicate(newOptionName);
-    if(isDuplicate){ alert('Duplicate option name');return;}
     AddOption(decisionId,newOptionName);
     setNewOptionName('');
   }
   const UpdateOptionHandler = () => {
-   let isDuplicate = CheckDuplicate(editOptionName);
-   if(isDuplicate){ 
-    alert('Duplicate option name');
-    setNewOptionName('');
-    return;
-  }
    UpdateOptionName(decisionId,onUpdateOptionId,editOptionName);
   }
   const DeleteOptionHandler = (id) => {
@@ -44,7 +31,7 @@ const Options = ({decisionId,options}) => {
         <TextField 
             required
             defaultValue={option.name}
-            variant="outlined"
+            variant='outlined'
             size='small' 
             fullWidth
             onChange={(e)=>setEditOptionName(e.target.value)}
@@ -83,7 +70,7 @@ const Options = ({decisionId,options}) => {
       <TextField 
             label="New option"
             value={newOptionName}
-            variant="outlined"
+            variant='outlined'
             size='small' 
             fullWidth
             onChange={(e)=>setNewOptionName(e.target.value)}

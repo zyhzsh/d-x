@@ -1,13 +1,14 @@
 import React,{useState,useRef,useContext} from 'react'
-import { Grid ,TextField,Button,Divider,Typography} from '@mui/material'
+import { Grid ,TextField,Button,Divider,Typography,IconButton} from '@mui/material'
 import { DecisionsContext } from '../../context/DecisionsContext';
 import { useMediaQuery } from "@mui/material";
 
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
+import DeleteIcon from '@mui/icons-material/Delete';
 const Question = ({decisionId,question}) => {
   const isMidScreen = useMediaQuery(theme => theme.breakpoints.down("md"));
-  const { UpdateQuestionTitle } = useContext(DecisionsContext);
+  const { UpdateQuestionTitle ,DeleteDecision} = useContext(DecisionsContext);
   const [isDisabledTitle,setIsDisabledTitle] = useState(false);
   const title = useRef();
   const UpdateQuestion = () =>{
@@ -31,14 +32,19 @@ const Question = ({decisionId,question}) => {
           inputRef={title}
           disabled={!isDisabledTitle} 
           defaultValue={question}
-          variant="outlined"
+          variant='outlined'
           size='small' 
           fullWidth/>}
           {!isDisabledTitle&&<Grid container justifyContent='center' alignItems='center'><Typography {...{ variant:`${isMidScreen?`body1`:"h6"}`}}>{question}</Typography></Grid>}
        </Grid>
-       <Grid item xs={2} md={1.5}>
-         {!isDisabledTitle&&<Button variant="outlined" fullWidth onClick={()=>setIsDisabledTitle(prev=>!prev)}><EditIcon/></Button>}
-         {isDisabledTitle&&<Button variant="outlined" fullWidth onClick={UpdateQuestion}><CheckIcon/></Button>}
+       <Grid item container spacing={1} xs={2} md={1.5}>
+          {isMidScreen?
+            <><Grid item xs={6}> {!isDisabledTitle&&<IconButton fullWidth variant='outlined' onClick={()=>setIsDisabledTitle(prev=>!prev)}><EditIcon/></IconButton>}
+         {isDisabledTitle&&<IconButton fullWidth variant='outlined' onClick={UpdateQuestion}><CheckIcon/></IconButton>}</Grid>
+         <Grid item xs={6}><IconButton fullWidth variant='outlined' onClick={()=>{DeleteDecision(decisionId)}}><DeleteIcon/></IconButton></Grid></>
+          :<><Grid item xs={6}> {!isDisabledTitle&&<Button fullWidth variant='outlined' onClick={()=>setIsDisabledTitle(prev=>!prev)}><EditIcon/></Button>}
+         {isDisabledTitle&&<Button fullWidth variant='outlined' onClick={UpdateQuestion}><CheckIcon/></Button>}</Grid>
+         <Grid item xs={6}><Button fullWidth variant='outlined' onClick={()=>{DeleteDecision(decisionId)}}><DeleteIcon/></Button></Grid></>}
        </Grid>
        <Grid item xs={12} >
           <Divider/>

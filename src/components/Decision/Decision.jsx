@@ -16,6 +16,7 @@ const Decision = ({decision}) => {
       sx={{
         backgroundColor:'background.paper',
         padding:'10px 0 10px 0',
+        mb:'10px',
         maxWidth:'80%',
         borderRadius: '10px',
         boxShadow: '10px 8px 0px -4px rgba(0,0,0,0.2)',

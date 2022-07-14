@@ -17,10 +17,9 @@ const Factors = ({decisionId,factors}) => {
     setNewFactorName('');
   }
   const UpdateFactorHandler = () => {
+    console.log(onUpdateOptionId,editFactorName)
     UpdateFactorName(decisionId,onUpdateOptionId,editFactorName);
-    setTimeout(() => {
-      setOnUpdateOptionId(null);
-    }, 200);
+    setOnUpdateOptionId(null);
   }
   const DeleteFactorHandler = (id) => {
     RemoveFactor(decisionId,id)
@@ -45,7 +44,7 @@ const Factors = ({decisionId,factors}) => {
         <TextField 
             required
             defaultValue={factor.name}
-            variant="outlined"
+            variant='outlined'
             size='small' 
             fullWidth
             onChange={(e)=>setEditFactorName(e.target.value)}
@@ -71,7 +70,7 @@ const Factors = ({decisionId,factors}) => {
 
   return (
       <Grid item md={5.9} container sx={{  
-        maxHeight: '300px',
+        // maxHeight: '700px',
         padding: '0 .5rem 0 .5rem ',
         overflowY: 'auto',
         overflowX: 'hidden',
@@ -99,7 +98,7 @@ const Factors = ({decisionId,factors}) => {
       <TextField 
             label="New option"
             value={newFactorName}
-            variant="outlined"
+            variant='outlined'
             size='small' 
             fullWidth
             onChange={(e)=>setNewFactorName(e.target.value)}
