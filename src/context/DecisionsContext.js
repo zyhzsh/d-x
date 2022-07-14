@@ -3,48 +3,48 @@ import React, { createContext, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 
-const factors = [
-  {
-    id:uuidv4(),
-    name:'价钱',
-    weight:0,
-    score:0
-  },
-  {
-    id:uuidv4(),
-    name:'地点',
-    weight:0,
-    score:0
-  },
-  {
-    id:uuidv4(),
-    name:'语言',
-    weight:0,
-    score:0
-  }
-];
+// const factors = [
+//   {
+//     id:uuidv4(),
+//     name:'价钱',
+//     weight:0,
+//     score:0
+//   },
+//   {
+//     id:uuidv4(),
+//     name:'地点',
+//     weight:0,
+//     score:0
+//   },
+//   {
+//     id:uuidv4(),
+//     name:'语言',
+//     weight:0,
+//     score:0
+//   }
+// ];
 
 
-const options = [
-  { 
-    id:uuidv4(),
-    name:'中国',
-    score:0,
-    factors:factors
-  },
-  {
-    id:uuidv4(),
-    name:'日本',
-    score:0,
-    factors:factors
-  },
-  {
-    id:uuidv4(),
-    name:'德国',
-    score:0,
-    factors:factors
-   }
-];
+// const options = [
+//   { 
+//     id:uuidv4(),
+//     name:'中国',
+//     score:0,
+//     factors:factors
+//   },
+//   {
+//     id:uuidv4(),
+//     name:'日本',
+//     score:0,
+//     factors:factors
+//   },
+//   {
+//     id:uuidv4(),
+//     name:'德国',
+//     score:0,
+//     factors:factors
+//    }
+// ];
 
 const FetchedDecisions = [{
   id:uuidv4(),
