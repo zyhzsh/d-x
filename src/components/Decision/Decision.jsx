@@ -12,10 +12,11 @@ const Decision = ({decision}) => {
       direction='column'
       flexWrap='nowrap'
       sx={{
+        backgroundColor:'background.paper',
         padding:'10px 0 10px 0',
         maxWidth:'80%',
-        height: '600px',
-        border: '1px solid #fff',
+        borderRadius: '10px',
+        boxShadow: '10px 8px 0px -4px rgba(0,0,0,0.2)',
         overflow: 'auto',
         gap:1
       }}
@@ -26,11 +27,10 @@ const Decision = ({decision}) => {
     <Grid item container
         justifyItems='center'
         alignItems='start'
+        justifyContent='center'
         direction='row'
         flexWrap='wrap'
-        sx={{ 
-          justifyContent: 'space-between',
-        }} >
+   >
       {/* Options */}
         <Options 
           decisionId={decision.id}

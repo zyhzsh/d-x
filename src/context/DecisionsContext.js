@@ -48,10 +48,10 @@ const options = [
 
 const FetchedDecisions = [{
   id:uuidv4(),
-  name: '去哪玩？',
+  name: 'Your question here',
   description:'xxxx',
-  options:[],
-  factors:[],
+  options:options,
+  factors:factors,
 },
 ]
 
@@ -249,9 +249,6 @@ const DecisionsContextProvider = (props) => {
 
       ReCalculateOptionScore(updatedDecisions,decisionId);
     }
-
-
-
     return <DecisionsContext.Provider value={{ 
     decisions,
     UpdateQuestionTitle ,

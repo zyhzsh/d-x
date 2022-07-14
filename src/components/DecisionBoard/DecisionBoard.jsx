@@ -1,17 +1,17 @@
 import React,{useContext} from 'react'
-import { Grid } from '@mui/material'
+import { Grid ,Typography} from '@mui/material'
 import { DecisionsContext } from '../../context/DecisionsContext'
 import { DataGrid } from '@mui/x-data-grid';
-import { v4 as uuidv4 } from 'uuid';
 
 
 const DecisionBoard = ({decisionId,options}) => {
   const {UpdateFactorScore,FindDecision} = useContext(DecisionsContext);
 
+
   const column = [
     { 
-      field: "factor", 
-      headerName: "", 
+      filed:'name',
+      headerName: "Options", 
       width: 300,
       valueGetter:(params)=>{
         return params.row.name;
@@ -34,15 +34,21 @@ const DecisionBoard = ({decisionId,options}) => {
 
   
   return (
-    <Grid container 
-    item 
+    <Grid 
+      container 
+      flexDirection='column'
+      item 
      sx={{  
-      border: '1px solid #fff',
       height: '290px',
       overflow: 'auto',
       gap: 0.5
       }} >
-    {options.length !==0 && <DataGrid
+      <Grid item container justifyContent='center' alignItems='center'>
+       <Grid item  container justifyContent='center' alignItems='center' xs={12} ><Typography variant="h4" >Scores</Typography></Grid>
+
+      </Grid>
+    {options.length !==0 ?
+      <DataGrid
         getRowId={(row)=>row.id}
         rows={options}
         columns={column}
@@ -54,7 +60,9 @@ const DecisionBoard = ({decisionId,options}) => {
            let factorId = values.row.factors.find((f=>f.name===factorName)).id;
            UpdateFactorScore(decisionId,optionId,factorId,value);
         }}
-      />}
+      />:
+    <Grid item  container justifyContent='center' alignItems='center' ><Typography variant="h6" >No</Typography></Grid>
+    }
   </Grid>
   )
 }

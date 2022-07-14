@@ -1,6 +1,8 @@
 import React,{useState,useRef,useContext} from 'react'
-import { Grid ,TextField,Button} from '@mui/material'
+import { Grid ,TextField,Button,Divider,Typography} from '@mui/material'
 import { DecisionsContext } from '../../context/DecisionsContext';
+import EditIcon from '@mui/icons-material/Edit';
+import CheckIcon from '@mui/icons-material/Check';
 const Question = ({decisionId,question}) => {
   const { UpdateQuestionTitle } = useContext(DecisionsContext);
   const [isDisabledTitle,setIsDisabledTitle] = useState(false);
@@ -10,7 +12,7 @@ const Question = ({decisionId,question}) => {
     setIsDisabledTitle(prev=>!prev);
   }
   return (
-        <Grid 
+      <Grid 
           item 
           container
           alignItems= 'center'
@@ -22,18 +24,21 @@ const Question = ({decisionId,question}) => {
        }} 
        >
        <Grid item xs={9} sm={9} md={10} lg={10}>
-         <TextField 
+         {isDisabledTitle&&<TextField 
           inputRef={title}
           disabled={!isDisabledTitle} 
-          label="Question"
           defaultValue={question}
           variant="outlined"
           size='small' 
-          fullWidth/>
+          fullWidth/>}
+          {!isDisabledTitle&&<Grid container justifyContent='center' alignItems='center'><Typography variant='h3'>{question}</Typography></Grid>}
        </Grid>
        <Grid item xs={2} md={1.5}>
-         {!isDisabledTitle&&<Button variant="outlined" fullWidth onClick={()=>setIsDisabledTitle(prev=>!prev)}>Edit</Button>}
-         {isDisabledTitle&&<Button variant="outlined" fullWidth onClick={UpdateQuestion}>Confirm</Button>}
+         {!isDisabledTitle&&<Button variant="outlined" fullWidth onClick={()=>setIsDisabledTitle(prev=>!prev)}><EditIcon/></Button>}
+         {isDisabledTitle&&<Button variant="outlined" fullWidth onClick={UpdateQuestion}><CheckIcon/></Button>}
+       </Grid>
+       <Grid item xs={12} >
+          <Divider/>
        </Grid>
    </Grid>
   )
