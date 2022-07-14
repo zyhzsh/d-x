@@ -1,7 +1,6 @@
 import React,{useState,useContext} from 'react'
 import { DecisionsContext } from '../../context/DecisionsContext';
 import { Grid,Button,TextField,IconButton,Typography,Slider,Divider} from '@mui/material'
-import { v4 as uuidv4 } from 'uuid';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 const Factors = ({decisionId,factors}) => {

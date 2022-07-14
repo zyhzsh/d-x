@@ -11,22 +11,27 @@ const DecisionBoard = ({decisionId,options}) => {
   const column = [
     { 
       filed:'name',
-      headerName: "Options", 
+      headerName: <Typography variant='h6'>Option</Typography>, 
+      headerAlign:'center',
+      align:'center',
       width: 300,
-      valueGetter:(params)=>{
-        return params.row.name;
+      renderCell:(params)=>{
+        return <Typography variant='body1'><strong>{params.row.name}</strong></Typography>
       }
     },
     ...FindDecision(decisionId).factors.map((f=>{
       return {
+
         field:f.name,
-        headerName:f.name,
+        headerName: <Typography variant='h6'>{f.name}</Typography>,
+        headerAlign:'center',
+        align:'center',
         width: 200,
         editable: true,
         type: "number",
-        valueGetter:(params)=>{
+        renderCell:(params)=>{
         let factor = params.row.factors.find(fa=>fa.id===f.id);
-        return factor.score;
+        return <Typography variant='body1'><strong>{factor.score}</strong></Typography>;
       }
       }
     }))
@@ -55,6 +60,9 @@ const DecisionBoard = ({decisionId,options}) => {
         hideFooter={true}
         onCellEditCommit={(values,event)=>{
            let value = values.value;
+           if(typeof value !== 'number') return;
+           if(value > 100) value = 100;
+           if(value < 0) value = 0;
            let optionId = values.row.id;
            let factorName = values.field;
            let factorId = values.row.factors.find((f=>f.name===factorName)).id;

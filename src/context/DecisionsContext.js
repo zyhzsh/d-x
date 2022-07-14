@@ -50,8 +50,8 @@ const FetchedDecisions = [{
   id:uuidv4(),
   name: 'Your question here',
   description:'xxxx',
-  options:options,
-  factors:factors,
+  options:[],
+  factors:[],
 },
 ]
 
