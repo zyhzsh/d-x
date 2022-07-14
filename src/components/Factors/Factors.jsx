@@ -9,27 +9,14 @@ const Factors = ({decisionId,factors}) => {
   const [onUpdateOptionId,setOnUpdateOptionId] = useState(null);
   const [editFactorName,setEditFactorName] = useState('');
 
-  const CheckDuplicate = (value)=>{
-    let duplicateFactor = factors.find((o=>{return o.name === value}));
-    if(duplicateFactor) return true;
-    return false;
-  }
-
 
   const AddNewFactorHandler = () => {
     if(newFactorName==='') return;
-    let isDuplicate = CheckDuplicate(newFactorName);
-    if(isDuplicate){ alert('Duplicate factor name');return;}
+
     AddFactor(decisionId,newFactorName);
     setNewFactorName('');
   }
   const UpdateFactorHandler = () => {
-    let isDuplicate = CheckDuplicate(editFactorName);
-   if(isDuplicate){ 
-    alert('Duplicate factor name');
-    setNewFactorName('');
-    UpdateFactorName(decisionId,onUpdateOptionId,'');
-  }
     UpdateFactorName(decisionId,onUpdateOptionId,editFactorName);
     setTimeout(() => {
       setOnUpdateOptionId(null);

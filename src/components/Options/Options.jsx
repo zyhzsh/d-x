@@ -29,7 +29,7 @@ const Options = ({decisionId,options}) => {
    if(isDuplicate){ 
     alert('Duplicate option name');
     setNewOptionName('');
-    UpdateOptionName(decisionId,onUpdateOptionId,'');
+    return;
   }
    UpdateOptionName(decisionId,onUpdateOptionId,editOptionName);
   }

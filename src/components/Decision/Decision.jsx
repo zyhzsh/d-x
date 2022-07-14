@@ -6,6 +6,8 @@ const Decision = ({decision}) => {
 
   return (
     <Grid 
+      item
+      xs={11}
       container
       justifyItems='center'
       alignItems='center'
