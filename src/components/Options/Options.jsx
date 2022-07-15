@@ -7,17 +7,32 @@ const Options = ({decisionId,options}) => {
   const {AddOption,UpdateOptionName,RemoveOption} = useContext(DecisionsContext);
   const [newOptionName,setNewOptionName] = useState('');
   const [onUpdateOptionId,setOnUpdateOptionId] = useState(null);
-
   const [editOptionName,setEditOptionName] = useState('');
 
-
+  const IsDuplicate = (name) =>{
+    const result = options.find((o=>o.name===name));
+    if(result) return true;
+    return false;
+  }
+  const IsTheSameAsBefore = (optionId,name) =>{
+    const option = options.find((o=>o.id===optionId));
+    return option?.name === name;
+  }
 
   const AddNewOptionHandler = () => {
     if(newOptionName==='') return;
+    if(IsDuplicate(newOptionName)){ alert('Name duplicate');return;} 
     AddOption(decisionId,newOptionName);
     setNewOptionName('');
   }
   const UpdateOptionHandler = () => {
+  if(IsDuplicate(editOptionName)){
+    if(IsTheSameAsBefore(editOptionName)){
+      return;
+    }
+    alert('Name duplicate'); 
+    return;
+  } 
    UpdateOptionName(decisionId,onUpdateOptionId,editOptionName);
   }
   const DeleteOptionHandler = (id) => {

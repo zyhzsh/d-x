@@ -147,7 +147,7 @@ const DecisionsContextProvider = (props) => {
       let newFactor = {id:uuidv4(),name:value,score:0, weight:0};
       let updatedDecision = {
         ...decision,
-        factors:[newFactor,...decision.factors],
+        factors:[...decision.factors,newFactor],
         options:[...decision.options.map((o=>{return {...o,factors:[newFactor,...o.factors]}}))]
       }
       let updatedDecisions = [...decisions.filter(d=>d.id!==decisionId),updatedDecision];

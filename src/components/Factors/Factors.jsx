@@ -9,17 +9,32 @@ const Factors = ({decisionId,factors}) => {
   const [onUpdateOptionId,setOnUpdateOptionId] = useState(null);
   const [editFactorName,setEditFactorName] = useState('');
 
+  const IsDuplicate = (name) =>{
+    const result = factors.find((f=>f.name===name));
+    if(result) return true;
+    return false;
+  }
+  const IsTheSameAsBefore = (factorId,name) =>{
+    const factor = factors.find((f=>f.id===factorId));
+    return factor?.name === name;
+  }
 
   const AddNewFactorHandler = () => {
     if(newFactorName==='') return;
-
+    if(IsDuplicate(newFactorName)){ alert('Name duplicate');return;} 
     AddFactor(decisionId,newFactorName);
     setNewFactorName('');
   }
   const UpdateFactorHandler = () => {
-    console.log(onUpdateOptionId,editFactorName)
+    if(IsDuplicate(editFactorName)){
+    if(IsTheSameAsBefore(editFactorName)){
+      return;
+    }
+    alert('Name duplicate'); 
+    return;
+  } 
     UpdateFactorName(decisionId,onUpdateOptionId,editFactorName);
-    setOnUpdateOptionId(null);
+   // setOnUpdateOptionId(null);
   }
   const DeleteFactorHandler = (id) => {
     RemoveFactor(decisionId,id)

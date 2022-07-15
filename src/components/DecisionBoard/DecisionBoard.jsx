@@ -52,7 +52,6 @@ const DecisionBoard = ({decisionId,options}) => {
       </Grid>
     {options.length !==0?
       <DataGrid
-        // getRowId={(row)=>row.id}
         columns={column}
         rows={options}
         hideFooter={true}
