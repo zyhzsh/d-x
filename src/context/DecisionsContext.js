@@ -474,7 +474,6 @@ const DecisionsContextProvider = (props) => {
          if(d.id===decisionId) return newDecision;
          return d;
       }))]
-      console.log('jisun',JSON.stringify(newDecisions))
       setDecisions(newDecisions);
       Save(newDecisions)
     }
@@ -528,7 +527,6 @@ const DecisionsContextProvider = (props) => {
         }
         return d;
       })];
-      console.log(updatedDecisions)
       // let factor = FindFactor(decisionId,factorId);
       // if(factor === null || factor==='undefined' ) return;
       // let decisionIndex = decisions.findIndex(x => x.id === decisionId);
