@@ -450,7 +450,6 @@ const DecisionsContextProvider = (props) => {
       }))]
       ReCalculateOptionScore(updatedDecisions,decisionId);
     }
-
     const ReCalculateOptionScore = (updatedDecisions,decisionId) =>{
       let newDecision = {...updatedDecisions.find((d=> d.id === decisionId))};
       const totalWeights = newDecision.factors.reduce((prev,next)=>{
@@ -463,8 +462,11 @@ const DecisionsContextProvider = (props) => {
           o.factors.forEach(f => {
              score += Math.round(f.score * f.weight/totalWeights);
           });
-
           return {...o, score}
+        }))];
+      }else{
+        newDecision.options = [...newDecision.options.map((o=>{
+          return {...o, score:0}
         }))];
       }
    
@@ -526,8 +528,7 @@ const DecisionsContextProvider = (props) => {
         }
         return d;
       })];
-
-
+      console.log(updatedDecisions)
       // let factor = FindFactor(decisionId,factorId);
       // if(factor === null || factor==='undefined' ) return;
       // let decisionIndex = decisions.findIndex(x => x.id === decisionId);
