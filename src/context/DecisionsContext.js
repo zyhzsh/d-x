@@ -2,12 +2,136 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
+
+const templateFactors = [
+  {
+    id:1,
+    name:'Learning Curve',
+    score:0,
+    weight: 30
+  },
+  {
+    id:2,
+    name:'Community',
+    score:0,
+    weight: 75
+  },
+  {
+    id:3,
+    name:'Persoanl learning goal',
+    score:0,
+    weight: 100
+  },
+  {
+    id:4,
+    name:'Job market',
+    score:0,
+    weight: 60
+  }
+];
+
+const templateOptions = [
+  {
+    id:1,
+    name:'Node.js',
+    score:81,
+    factors: [
+      {
+        id:1,
+        name:'Learning Curve',
+        score:70,
+        weight: 30
+      },
+      {
+        id:2,
+        name:'Community',
+        score:0,
+        weight: 75
+      },
+      {
+        id:3,
+        name:'Persoanl learning goal',
+        score:80,
+        weight: 100
+      },
+      {
+        id:4,
+        name:'Job market',
+        score:80,
+        weight: 50
+      }
+    ],
+  },
+  {
+    id:2,
+    name:'Python web',
+    score:77,
+    factors: [
+      {
+        id:1,
+        name:'Learning Curve',
+        score:90,
+        weight: 30
+      },
+      {
+        id:2,
+        name:'Community',
+        score:90,
+        weight: 75
+      },
+      {
+        id:3,
+        name:'Persoanl learning goal',
+        score:60,
+        weight: 100
+      },
+      {
+        id:4,
+        name:'Job market',
+        score:80,
+        weight: 50
+      }
+    ],
+  },
+  {
+    id:3,
+    name:'.Net core',
+    score:80,
+    factors: [
+      {
+        id:1,
+        name:'Learning Curve',
+        score:70,
+        weight: 30
+      },
+      {
+        id:2,
+        name:'Community',
+        score:70,
+        weight: 75
+      },
+      {
+        id:3,
+        name:'Persoanl learning goal',
+        score:90,
+        weight: 100
+      },
+      {
+        id:4,
+        name:'Job market',
+        score:80,
+        weight: 50
+      }
+    ],
+  }
+];
+
 const templateDecisions = [{
   id:uuidv4(),
-  name: 'Your question here',
+  name: 'Which tech should I learn ?',
   description:'xxxx',
-  options:[],
-  factors:[],
+  options:templateOptions,
+  factors:templateFactors
 },
 ]
 
