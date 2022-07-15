@@ -514,15 +514,29 @@ const DecisionsContextProvider = (props) => {
     }
 
     const RemoveFactor = (decisionId,factorId) =>{
-      let factor = FindFactor(decisionId,factorId);
-      if(factor === null || factor==='undefined' ) return;
-      let decisionIndex = decisions.findIndex(x => x.id === decisionId);
-      if(decisionIndex === -1) return ;
-      let updatedDecision = {...decisions[decisionIndex]};
-      let updatedFactors = [...updatedDecision.factors.filter((factor=>{return factor.id!==factorId}))];
-      updatedDecision = {...decisions[decisionIndex], factors:updatedFactors, options:[...decisions[decisionIndex].options.map((o=>{return {...o,factors:updatedFactors}}))]};
-      let updatedDecisions = [...decisions];
-      updatedDecisions[decisionIndex]= updatedDecision;
+      let updatedDecisions = [...decisions.map(d=>{
+        if(d.id===decisionId){
+          return {
+            ...d,
+            factors:[...d.factors.filter((f=>f.id!==factorId))],
+            options:[...d.options.map((o=>{
+              return {...o,factors:[...o.factors.filter((f=>f.id!==factorId))]}
+            }))]
+          }
+        }
+        return d;
+      })];
+
+
+      // let factor = FindFactor(decisionId,factorId);
+      // if(factor === null || factor==='undefined' ) return;
+      // let decisionIndex = decisions.findIndex(x => x.id === decisionId);
+      // if(decisionIndex === -1) return ;
+      // let updatedDecision = {...decisions[decisionIndex]};
+      // let updatedFactors = [...updatedDecision.factors.filter((factor=>{return factor.id!==factorId}))];
+      // updatedDecision = {...decisions[decisionIndex], factors:updatedFactors, options:[...decisions[decisionIndex].options.map((o=>{return {...o,factors:updatedFactors}}))]};
+      // let updatedDecisions = [...decisions];
+      // updatedDecisions[decisionIndex]= updatedDecision;
       ReCalculateOptionScore(updatedDecisions,decisionId);
     }
     
