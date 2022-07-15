@@ -15,6 +15,7 @@ const DecisionBoard = ({decisionId,options}) => {
       headerAlign:'center',
       align:'center',
       width: 300,
+      flex:1,
       renderCell:(params)=>{
         return <Typography variant='body1'><strong>{params.row.name}</strong></Typography>
       }
@@ -26,6 +27,7 @@ const DecisionBoard = ({decisionId,options}) => {
         headerAlign:'center',
         align:'center',
         width: 200,
+        flex:1,
         editable: true,
         type: "number",
         renderCell:(params)=>{
@@ -43,7 +45,7 @@ const DecisionBoard = ({decisionId,options}) => {
       flexDirection='column'
       item 
       sx={{  
-      height: '290px',
+      height: '360px',
       overflow: 'auto',
       gap: 0.5
       }} >

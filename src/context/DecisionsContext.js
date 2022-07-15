@@ -3,135 +3,352 @@ import React, { createContext, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 
-const templateFactors = [
-  {
-    id:1,
-    name:'Learning Curve',
-    score:0,
-    weight: 30
-  },
-  {
-    id:2,
-    name:'Community',
-    score:0,
-    weight: 75
-  },
-  {
-    id:3,
-    name:'Persoanl learning goal',
-    score:0,
-    weight: 100
-  },
-  {
-    id:4,
-    name:'Job market',
-    score:0,
-    weight: 60
-  }
-];
+// const templateFactors = [
+//   {
+//     id:1,
+//     name:'Learning Curve',
+//     score:0,
+//     weight: 30
+//   },
+//   {
+//     id:2,
+//     name:'Community',
+//     score:0,
+//     weight: 75
+//   },
+//   {
+//     id:3,
+//     name:'Persoanl learning goal',
+//     score:0,
+//     weight: 100
+//   },
+//   {
+//     id:4,
+//     name:'Job market',
+//     score:0,
+//     weight: 60
+//   }
+// ];
 
-const templateOptions = [
-  {
-    id:1,
-    name:'Node.js',
-    score:81,
-    factors: [
-      {
-        id:1,
-        name:'Learning Curve',
-        score:70,
-        weight: 30
-      },
-      {
-        id:2,
-        name:'Community',
-        score:0,
-        weight: 75
-      },
-      {
-        id:3,
-        name:'Persoanl learning goal',
-        score:80,
-        weight: 100
-      },
-      {
-        id:4,
-        name:'Job market',
-        score:80,
-        weight: 50
-      }
-    ],
-  },
-  {
-    id:2,
-    name:'Python web',
-    score:77,
-    factors: [
-      {
-        id:1,
-        name:'Learning Curve',
-        score:90,
-        weight: 30
-      },
-      {
-        id:2,
-        name:'Community',
-        score:90,
-        weight: 75
-      },
-      {
-        id:3,
-        name:'Persoanl learning goal',
-        score:60,
-        weight: 100
-      },
-      {
-        id:4,
-        name:'Job market',
-        score:80,
-        weight: 50
-      }
-    ],
-  },
-  {
-    id:3,
-    name:'.Net core',
-    score:80,
-    factors: [
-      {
-        id:1,
-        name:'Learning Curve',
-        score:70,
-        weight: 30
-      },
-      {
-        id:2,
-        name:'Community',
-        score:70,
-        weight: 75
-      },
-      {
-        id:3,
-        name:'Persoanl learning goal',
-        score:90,
-        weight: 100
-      },
-      {
-        id:4,
-        name:'Job market',
-        score:80,
-        weight: 50
-      }
-    ],
-  }
-];
+// const templateOptions = [
+//   {
+//     id:1,
+//     name:'Node.js',
+//     score:81,
+//     factors: [
+//       {
+//         id:1,
+//         name:'Learning Curve',
+//         score:70,
+//         weight: 30
+//       },
+//       {
+//         id:2,
+//         name:'Community',
+//         score:90,
+//         weight: 75
+//       },
+//       {
+//         id:3,
+//         name:'Persoanl learning goal',
+//         score:80,
+//         weight: 100
+//       },
+//       {
+//         id:4,
+//         name:'Job market',
+//         score:80,
+//         weight: 50
+//       }
+//     ],
+//   },
+//   {
+//     id:2,
+//     name:'Python web',
+//     score:77,
+//     factors: [
+//       {
+//         id:1,
+//         name:'Learning Curve',
+//         score:90,
+//         weight: 30
+//       },
+//       {
+//         id:2,
+//         name:'Community',
+//         score:90,
+//         weight: 75
+//       },
+//       {
+//         id:3,
+//         name:'Persoanl learning goal',
+//         score:60,
+//         weight: 100
+//       },
+//       {
+//         id:4,
+//         name:'Job market',
+//         score:80,
+//         weight: 50
+//       }
+//     ],
+//   },
+//   {
+//     id:3,
+//     name:'.Net core',
+//     score:80,
+//     factors: [
+//       {
+//         id:1,
+//         name:'Learning Curve',
+//         score:70,
+//         weight: 30
+//       },
+//       {
+//         id:2,
+//         name:'Community',
+//         score:70,
+//         weight: 75
+//       },
+//       {
+//         id:3,
+//         name:'Persoanl learning goal',
+//         score:90,
+//         weight: 100
+//       },
+//       {
+//         id:4,
+//         name:'Job market',
+//         score:80,
+//         weight: 50
+//       }
+//     ],
+//   }
+// ];
 
 const templateDecisions = [{
   id:uuidv4(),
-  name: 'Which tech should I learn ?',
-  description:'xxxx',
-  options:templateOptions,
-  factors:templateFactors
+  name:"Template: Where should I go on holiday ?",
+  description:"xxxx",
+  options:[
+         {
+            "id":"c5fb378f-7370-4101-9045-ea1e2bec1cb7",
+            "name":"Span",
+            "score":65,
+            "factors":[
+               {
+                  "id":"565c29b5-131a-4312-a296-21dc657bb720",
+                  "name":"Please to every one ?",
+                  "score":30,
+                  "weight":20
+               },
+               {
+                  "id":"e47a100d-31f8-4ff3-b80e-ccec5fc16014",
+                  "name":"To see",
+                  "score":40,
+                  "weight":40
+               },
+               {
+                  "id":"0d4b8c9b-bcc8-4b2f-b238-c0c1063e037d",
+                  "name":"To do",
+                  "score":20,
+                  "weight":60
+               },
+               {
+                  "id":"d6dcbebe-6856-4458-8f68-686ce35b5a78",
+                  "name":"Weather",
+                  "score":80,
+                  "weight":80
+               },
+               {
+                  "id":"9913c9ef-00d1-4a1d-a3a0-ab4026338378",
+                  "name":"Cost",
+                  "score":100,
+                  "weight":100
+               }
+            ]
+         },
+         {
+            "id":"4e62a725-aa94-4317-ad87-1967f2fcc6c1",
+            "name":"Greece",
+            "score":92,
+            "factors":[
+               {
+                  "id":"565c29b5-131a-4312-a296-21dc657bb720",
+                  "name":"Please to every one ?",
+                  "score":80,
+                  "weight":20
+               },
+               {
+                  "id":"e47a100d-31f8-4ff3-b80e-ccec5fc16014",
+                  "name":"To see",
+                  "score":100,
+                  "weight":40
+               },
+               {
+                  "id":"0d4b8c9b-bcc8-4b2f-b238-c0c1063e037d",
+                  "name":"To do",
+                  "score":100,
+                  "weight":60
+               },
+               {
+                  "id":"d6dcbebe-6856-4458-8f68-686ce35b5a78",
+                  "name":"Weather",
+                  "score":100,
+                  "weight":80
+               },
+               {
+                  "id":"9913c9ef-00d1-4a1d-a3a0-ab4026338378",
+                  "name":"Cost",
+                  "score":80,
+                  "weight":100
+               }
+            ]
+         },
+         {
+            "id":"24090013-d979-4cc0-9dbc-7d0936231969",
+            "name":"France",
+            "score":64,
+            "factors":[
+               {
+                  "id":"565c29b5-131a-4312-a296-21dc657bb720",
+                  "name":"Please to every one ?",
+                  "score":60,
+                  "weight":20
+               },
+               {
+                  "id":"e47a100d-31f8-4ff3-b80e-ccec5fc16014",
+                  "name":"To see",
+                  "score":60,
+                  "weight":40
+               },
+               {
+                  "id":"0d4b8c9b-bcc8-4b2f-b238-c0c1063e037d",
+                  "name":"To do",
+                  "score":80,
+                  "weight":60
+               },
+               {
+                  "id":"d6dcbebe-6856-4458-8f68-686ce35b5a78",
+                  "name":"Weather",
+                  "score":60,
+                  "weight":80
+               },
+               {
+                  "id":"9913c9ef-00d1-4a1d-a3a0-ab4026338378",
+                  "name":"Cost",
+                  "score":60,
+                  "weight":100
+               }
+            ]
+         },
+         {
+            "id":"6e344647-8206-4f8e-9f64-f36ced00e3e2",
+            "name":"USA",
+            "score":54,
+            "factors":[
+               {
+                  "id":"565c29b5-131a-4312-a296-21dc657bb720",
+                  "name":"Please to every one ?",
+                  "score":100,
+                  "weight":20
+               },
+               {
+                  "id":"e47a100d-31f8-4ff3-b80e-ccec5fc16014",
+                  "name":"To see",
+                  "score":80,
+                  "weight":40
+               },
+               {
+                  "id":"0d4b8c9b-bcc8-4b2f-b238-c0c1063e037d",
+                  "name":"To do",
+                  "score":60,
+                  "weight":60
+               },
+               {
+                  "id":"d6dcbebe-6856-4458-8f68-686ce35b5a78",
+                  "name":"Weather",
+                  "score":40,
+                  "weight":80
+               },
+               {
+                  "id":"9913c9ef-00d1-4a1d-a3a0-ab4026338378",
+                  "name":"Cost",
+                  "score":40,
+                  "weight":100
+               }
+            ]
+         },
+         {
+            "id":"a8b91ac4-dde7-4763-8d8b-6a59a23558de",
+            "name":"Australia",
+            "score":24,
+            "factors":[
+               {
+                  "id":"565c29b5-131a-4312-a296-21dc657bb720",
+                  "name":"Please to every one ?",
+                  "score":20,
+                  "weight":20
+               },
+               {
+                  "id":"e47a100d-31f8-4ff3-b80e-ccec5fc16014",
+                  "name":"To see",
+                  "score":20,
+                  "weight":40
+               },
+               {
+                  "id":"0d4b8c9b-bcc8-4b2f-b238-c0c1063e037d",
+                  "name":"To do",
+                  "score":40,
+                  "weight":60
+               },
+               {
+                  "id":"d6dcbebe-6856-4458-8f68-686ce35b5a78",
+                  "name":"Weather",
+                  "score":20,
+                  "weight":80
+               },
+               {
+                  "id":"9913c9ef-00d1-4a1d-a3a0-ab4026338378",
+                  "name":"Cost",
+                  "score":20,
+                  "weight":100
+               }
+            ]
+         }
+  ],
+  factors:[
+         {
+            "id":"9913c9ef-00d1-4a1d-a3a0-ab4026338378",
+            "name":"Cost",
+            "score":0,
+            "weight":100
+         },
+         {
+            "id":"d6dcbebe-6856-4458-8f68-686ce35b5a78",
+            "name":"Weather",
+            "score":0,
+            "weight":80
+         },
+         {
+            "id":"0d4b8c9b-bcc8-4b2f-b238-c0c1063e037d",
+            "name":"To do",
+            "score":0,
+            "weight":60
+         },
+         {
+            "id":"e47a100d-31f8-4ff3-b80e-ccec5fc16014",
+            "name":"To see",
+            "score":0,
+            "weight":40
+         },
+         {
+            "id":"565c29b5-131a-4312-a296-21dc657bb720",
+            "name":"Please to every one ",
+            "score":0,
+            "weight":20
+         }
+  ] 
 },
 ]
 
@@ -244,7 +461,7 @@ const DecisionsContextProvider = (props) => {
         newDecision.options = [...newDecision.options.map((o=>{
           let score = 0;
           o.factors.forEach(f => {
-            score += Math.round(f.score * f.weight/totalWeights);
+             score += Math.round(f.score * f.weight/totalWeights);
           });
 
           return {...o, score}
@@ -255,6 +472,7 @@ const DecisionsContextProvider = (props) => {
          if(d.id===decisionId) return newDecision;
          return d;
       }))]
+      console.log('jisun',JSON.stringify(newDecisions))
       setDecisions(newDecisions);
       Save(newDecisions)
     }

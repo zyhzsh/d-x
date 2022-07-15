@@ -59,7 +59,7 @@ const Options = ({decisionId,options}) => {
     </Grid>);
   return (
       <Grid item md={5.9} container sx={{  
-        maxHeight: '300px',
+        // maxHeight: '300px',
         padding: '0 .5rem 0 .5rem ',
         overflowY: 'auto',
         }} >
