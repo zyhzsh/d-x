@@ -33,20 +33,20 @@ const DecisionBoard = ({ decisionId, options }) => {
         renderCell: (params) => {
           let factor = params.row.factors.find(fa => fa.id === f.id);
           let optionId = params.row.id;
-          return <Slider
-            key={`slider-${'sdd'}`}
-            size="small"
-            sx={{ ml: 1, width: '70%' }}
-            // TODO: Fix Error :MUI: A component is changing the default value state of an uncontrolled Slider after being initialized. To suppress this warning opt to use a controlled Slider.
-            defaultValue={factor.weight}
-            valueLabelDisplay="auto"
-            // onChange={(e)=>processChange(factor.id,e.target.value)}
-            onChangeCommitted={(_, value) => {
-              UpdateFactorScore(decisionId, optionId, factor.id, value);
-            }
-            }
-          />
-          //return <Typography variant='body1'><strong>{factor.score}</strong></Typography>;
+          // return <Slider
+          //   key={`slider-${'sdd'}`}
+          //   size="small"
+          //   sx={{ ml: 1, width: '70%' }}
+          //   // TODO: Fix Error :MUI: A component is changing the default value state of an uncontrolled Slider after being initialized. To suppress this warning opt to use a controlled Slider.
+          //   defaultValue={factor.weight}
+          //   valueLabelDisplay="auto"
+          //   // onChange={(e)=>processChange(factor.id,e.target.value)}
+          //   onChangeCommitted={(_, value) => {
+          //     UpdateFactorScore(decisionId, optionId, factor.id, value);
+          //   }
+          //   }
+          // />
+          return <Typography variant='body1'><strong>{factor.score}</strong></Typography>;
         }
       }
     }))
@@ -72,16 +72,16 @@ const DecisionBoard = ({ decisionId, options }) => {
           columns={column}
           rows={options}
           hideFooter={true}
-        // onCellEditCommit={(values, _) => {
-        //   let value = values.value;
-        //   if (typeof value !== 'number') return;
-        //   if (value > 100) value = 100;
-        //   if (value < 0) value = 0;
-        //   let optionId = values.row.id;
-        //   let factorName = values.field;
-        //   let factorId = values.row.factors.find((f => f.name === factorName)).id;
-        //   UpdateFactorScore(decisionId, optionId, factorId, value);
-        // }}
+          onCellEditCommit={(values, _) => {
+            let value = values.value;
+            if (typeof value !== 'number') return;
+            if (value > 100) value = 100;
+            if (value < 0) value = 0;
+            let optionId = values.row.id;
+            let factorName = values.field;
+            let factorId = values.row.factors.find((f => f.name === factorName)).id;
+            UpdateFactorScore(decisionId, optionId, factorId, value);
+          }}
         /> :
         <Grid item container justifyContent='center' alignItems='center' ><Typography variant="body1" >No content</Typography></Grid>
       }
